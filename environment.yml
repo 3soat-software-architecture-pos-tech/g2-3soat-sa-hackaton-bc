@@ -1,0 +1,6 @@
+STAGE: ${file(serverless.yml):provider.stage}
+
+# Portanto, DOCTORS_DYNAMODB_TABLE_ARN: !GetAtt DoctorsTable.Arn significa que você está definindo uma 
+# variável ou parâmetro chamado DOCTORS_DYNAMODB_TABLE_ARN para armazenar o ARN da tabela DynamoDB denominada DoctorsTable, 
+# usando a função !GetAtt para obter o atributo ARN desse recurso específico dentro do seu template AWS CloudFormation.
+DOCTORS_DYNAMODB_TABLE_ARN: !GetAtt DoctorsTable.Arn
