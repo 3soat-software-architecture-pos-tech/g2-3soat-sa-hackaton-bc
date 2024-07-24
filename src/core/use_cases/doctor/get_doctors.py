@@ -1,5 +1,5 @@
-from core.entities.doctor import Doctor
-from core.interfaces.doctor_repository import DoctorRepository
+from src.core.entities.doctor import Doctor
+from src.core.interfaces.doctor_repository import DoctorRepository
 
 class GetDoctorsUseCase:
 		def __init__(self, doctor_repo: DoctorRepository):

@@ -20,6 +20,8 @@ custom:
     Fn::GetAtt:
       - DoctorsTable
       - Arn
+  pythonRequirements:
+    dockerizePip: true
 
 package:
   patterns:
@@ -32,3 +34,5 @@ package:
     - '!node_modules/**'
     - '!package.json'
     - '!package-lock.json'
+plugins:
+  - serverless-python-requirements

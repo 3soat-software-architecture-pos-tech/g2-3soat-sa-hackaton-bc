@@ -20,7 +20,7 @@ class DynamoDBDoctorRepository(DoctorRepository):
 		return [Doctor(**doctor) for doctor in response['Items']]
 	
 	def add_doctor(self, doctor: Doctor) -> None:
-		self.table.put_item(Item=doctor.model_dump())
+		self.table.put_item(Item=doctor.dict())
 
 	def update_doctor(self, doctor_id: str, doctor: Doctor) -> None:
 		self.table.update_item(

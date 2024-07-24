@@ -1,10 +1,9 @@
-
 import json
-from core.entities.doctor import Doctor
-from core.use_cases.doctor.add_doctor import AddDoctorUseCase
-from infrastructure.dynamodb.doctor_repository import DynamoDBDoctorRepository
+from src.core.entities.doctor import Doctor
+from src.core.use_cases.doctor.add_doctor import AddDoctorUseCase
+from src.infrastructure.dynamodb.doctor_repository import DynamoDBDoctorRepository
 
-def main(event, context):
+def add_doctor_handler(event, context):
 		doctor = Doctor(**json.loads(event['body']))
 		repository = DynamoDBDoctorRepository()
 		use_case = AddDoctorUseCase(repository)

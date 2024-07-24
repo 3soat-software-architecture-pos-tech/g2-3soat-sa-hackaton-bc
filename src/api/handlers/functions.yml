@@ -1,16 +1,16 @@
 addDoctor:
-    handler: src/api/handlers/doctors/add_doctor.main
+    handler: src/api/handlers/doctors/add_doctor.add_doctor_handler
     memorySize: 256
     timeout: 30
     maximumRetryAttempts: 0
     events:
       - http:
-          path: doctors
+          path: doctor
           method: post
           cors: true
 
 getDoctors:
-    handler: src/api/handlers/doctors/get_doctor.main
+    handler: src/api/handlers/doctors/get_doctors.get_doctors_handler
     memorySize: 256
     timeout: 30
     maximumRetryAttempts: 0

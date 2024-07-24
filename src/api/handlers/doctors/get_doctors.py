@@ -1,9 +1,9 @@
 import json
-from core.use_cases.doctor.get_doctors import GetDoctorsUseCase
-from infrastructure.dynamodb.doctor_repository import DynamoDBDoctorRepository
+from src.core.use_cases.doctor.get_doctors import GetDoctorsUseCase
+from src.infrastructure.dynamodb.doctor_repository import DynamoDBDoctorRepository
 
 
-def main(event, context):
+def get_doctors_handler(event, context):
 	repository = DynamoDBDoctorRepository()
 	use_case = GetDoctorsUseCase(repository)
 	doctors = use_case.execute()

@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Doctor(BaseModel):
-		id: int
+		id: str
 		name: str
 		cpf: str
 		crm: str
