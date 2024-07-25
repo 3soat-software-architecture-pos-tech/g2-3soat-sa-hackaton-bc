@@ -20,6 +20,14 @@ custom:
     Fn::GetAtt:
       - DoctorsTable
       - Arn
+  pacientesTableArn:
+    Fn::GetAtt:
+      - PacientesTable
+      - Arn
+  prontuariosTableArn:
+    Fn::GetAtt:
+      - ProntuariosTable
+      - Arn
   pythonRequirements:
     dockerizePip: true
 

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
 from src.core.entities.doctor import Doctor
 
 class DoctorRepository(ABC): 
@@ -8,7 +8,7 @@ class DoctorRepository(ABC):
 				pass
 
 		@abstractmethod
-		def get_doctors(self) -> List[Doctor]:
+		def get_doctors(self, avaliacao: Optional[str] = None, distancia: Optional[str] = None, especialidade: Optional[str] = None) -> List[Doctor]:
 				pass
 
 		@abstractmethod

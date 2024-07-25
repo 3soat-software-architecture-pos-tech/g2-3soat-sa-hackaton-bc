@@ -19,6 +19,71 @@ Resources:
           Projection:
             ProjectionType: ALL
       BillingMode: PAY_PER_REQUEST
+  PacientesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Pacientes
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: cpf
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: CpfIndex
+          KeySchema:
+            - AttributeName: cpf
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+  ProntuariosTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: 'Prontuarios'
+      AttributeDefinitions:
+        - AttributeName: 'id'
+          AttributeType: 'S'
+        - AttributeName: 'id_paciente'
+          AttributeType: 'S'
+        - AttributeName: 'id_medico'
+          AttributeType: 'S'
+        # - AttributeName: 'consulta_data'
+        #   AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'id'
+          KeyType: 'HASH'  # Partition key
+      GlobalSecondaryIndexes:
+        - IndexName: 'PacienteIndex'
+          KeySchema:
+            - AttributeName: 'id_paciente'
+              KeyType: 'HASH'  # Partition key for index
+            # - AttributeName: 'consulta_data'
+            #   KeyType: 'RANGE'  # Sort key for index
+          Projection:
+            ProjectionType: 'ALL'
+        - IndexName: 'MedicoIndex'
+          KeySchema:
+            - AttributeName: 'id_medico'
+              KeyType: 'HASH'  # Partition key for index
+            # - AttributeName: 'consulta_data'
+            #   KeyType: 'RANGE'  # Sort key for index
+          Projection:
+            ProjectionType: 'ALL'
+      BillingMode: PAY_PER_REQUEST
+  # ProntuariosTable:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: Prontuarios
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #     BillingMode: PAY_PER_REQUEST
 
   DefaultRole:
     Type: AWS::IAM::Role
@@ -60,3 +125,6 @@ Resources:
                   - dynamodb:DeleteItem
                 Resource:
                   - !GetAtt DoctorsTable.Arn
+                  - !GetAtt PacientesTable.Arn
+                  - !GetAtt ProntuariosTable.Arn
+                  - !Sub "${ProntuariosTable.Arn}/index/*"

@@ -9,6 +9,28 @@ addDoctor:
           method: post
           cors: true
 
+addPaciente:
+    handler: src/api/handlers/pacientes/add_paciente.add_paciente_handler
+    memorySize: 256
+    timeout: 30
+    maximumRetryAttempts: 0
+    events:
+      - http:
+          path: paciente
+          method: post
+          cors: true
+
+addProntuario:
+    handler: src/api/handlers/prontuario/add_prontuario.add_prontuario_handler
+    memorySize: 256
+    timeout: 30
+    maximumRetryAttempts: 0
+    events:
+      - http:
+          path: prontuario
+          method: post
+          cors: true
+
 getDoctors:
     handler: src/api/handlers/doctors/get_doctors.get_doctors_handler
     memorySize: 256
@@ -17,5 +39,40 @@ getDoctors:
     events:
       - http:
           path: doctors
+          method: get
+          cors: true
+
+getPacientes:
+    handler: src/api/handlers/pacientes/get_pacientes.get_pacientes_handler
+    memorySize: 256
+    timeout: 30
+    maximumRetryAttempts: 0
+    events:
+      - http:
+          path: pacientes
+          method: get
+          cors: true
+
+# /prontuario/:idPaciente/
+getProntuariosByPaciente:
+    handler: src/api/handlers/prontuario/get_prontuarios_by_paciente.get_prontuarios_by_paciente_handler
+    memorySize: 256
+    timeout: 30
+    maximumRetryAttempts: 0
+    events:
+      - http:
+          path: prontuario/paciente/{idPaciente}
+          method: get
+          cors: true
+
+# /prontuario/:idPaciente/:idMedico
+getProntuariosByMedico:
+    handler: src/api/handlers/prontuario/get_prontuarios_by_medico.get_prontuarios_by_medico_handler
+    memorySize: 256
+    timeout: 30
+    maximumRetryAttempts: 0
+    events:
+      - http:
+          path: prontuario/paciente/{idPaciente}/medico/{idMedico}
           method: get
           cors: true
