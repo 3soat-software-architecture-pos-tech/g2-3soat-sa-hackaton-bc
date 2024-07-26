@@ -12,13 +12,13 @@ class Doctor(BaseModel):
 		email: str
 		telefone: str
 		especialidade: Especialidade
-		distancia: str
-		avaliacao: str
+		distancia: int
+		avaliacao: int
 
 
 # {
 # 	"id": "1",
-# 	"nome": "Dr. Fulano",
+# 	"nome": "Dr. House",
 # 	"cpf": "123.456.789-00",
 # 	"crm": "123456",
 # 	"email": "",
@@ -27,7 +27,7 @@ class Doctor(BaseModel):
 # 		"id": "1",
 # 		"especialidade": "Cardiologista"
 # 	},
-# 	"distancia": "5 km",
+# 	"distancia": "5",
 # 	"avaliacao": "4.5"
 # }
 

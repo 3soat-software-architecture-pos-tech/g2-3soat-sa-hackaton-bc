@@ -7,4 +7,4 @@ class GetDoctorsUseCase:
 				self.doctor_repo = doctor_repo
 
 		def execute(self, avaliacao: Optional[str] = None, distancia: Optional[str] = None, especialidade: Optional[str] = None):
-				return self.doctor_repo.get_doctors(avaliacao, especialidade, distancia)
+				return self.doctor_repo.get_doctors(avaliacao, distancia, especialidade)

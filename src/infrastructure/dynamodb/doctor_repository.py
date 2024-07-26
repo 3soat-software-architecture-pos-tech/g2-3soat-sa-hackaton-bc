@@ -17,23 +17,25 @@ class DynamoDBDoctorRepository(DoctorRepository):
 	
 	def get_doctors(self, avaliacao: Optional[str] = None, distancia: Optional[str] = None, especialidade: Optional[str] = None) -> List[Doctor]:
 		filter_conditions = []
-		if avaliacao:
-				filter_conditions.append(Attr('avaliacao').eq(avaliacao))
-		if distancia:
-				filter_conditions.append(Attr('distancia').eq(distancia))
-		if especialidade:
+		if avaliacao is not None:
+				filter_conditions.append(Attr('avaliacao').gte(int(avaliacao)))
+		if distancia is not None:
+				filter_conditions.append(Attr('distancia').lte(int(distancia)))
+		if especialidade is not None:
 				filter_conditions.append(Attr('especialidade.id').eq(especialidade))
 
+		filter_expression = None
 		if filter_conditions:
-				print(filter_conditions)
-				filter_expression = filter_conditions[0]
-				for condition in filter_conditions[1:]:
-						filter_expression = filter_expression & condition
+			filter_expression = filter_conditions[0]
+			for condition in filter_conditions[1:]:
+					filter_expression &= condition
+			
+			response = self.table.scan(
+					FilterExpression=filter_expression
+			)
 		else:
-				filter_expression = None
-
-		response = self.table.scan(FilterExpression=filter_expression) if filter_expression else self.table.scan()
-		# response = self.table.scan()
+				response = self.table.scan()
+		# return response.get('Items', [])
 		return [Doctor(**doctor) for doctor in response['Items']]
 	
 	def add_doctor(self, doctor: Doctor) -> None:
@@ -42,14 +44,14 @@ class DynamoDBDoctorRepository(DoctorRepository):
 	def update_doctor(self, doctor_id: str, doctor: Doctor) -> None:
 		self.table.update_item(
 			Key={'id': doctor_id},
-			UpdateExpression='SET name = :name, cpf = :cpf, crm = :crm, email = :email, phone = :phone, specialty = :specialty',
+			UpdateExpression='SET nome = :nome, cpf = :cpf, crm = :crm, email = :email, telefone = :telefone, especialidade = :especialidade',
 			ExpressionAttributeValues={
-				':name': doctor.name,
+				':nome': doctor.nome,
 				':cpf': doctor.cpf,
 				':crm': doctor.crm,
 				':email': doctor.email,
-				':phone': doctor.phone,
-				':specialty': doctor.specialty
+				':telefone': doctor.telefone,
+				':especialidade': doctor.especialidade
 			}
 		)
 

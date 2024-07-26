@@ -8,6 +8,12 @@ Resources:
           AttributeType: S
         - AttributeName: cpf
           AttributeType: S
+        - AttributeName: especialidade_id
+          AttributeType: S
+        - AttributeName: distancia
+          AttributeType: N
+        - AttributeName: avaliacao
+          AttributeType: N
       KeySchema:
         - AttributeName: id
           KeyType: HASH
@@ -16,6 +22,30 @@ Resources:
           KeySchema:
             - AttributeName: cpf
               KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: EspecialidadeIndex
+          KeySchema:
+            - AttributeName: especialidade_id
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: AvaliacaoIndex
+          KeySchema:
+            - AttributeName: avaliacao
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: DistanciaIndex
+          KeySchema:
+            - AttributeName: distancia
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
           Projection:
             ProjectionType: ALL
       BillingMode: PAY_PER_REQUEST
@@ -73,17 +103,6 @@ Resources:
           Projection:
             ProjectionType: 'ALL'
       BillingMode: PAY_PER_REQUEST
-  # ProntuariosTable:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     TableName: Prontuarios
-  #     AttributeDefinitions:
-  #       - AttributeName: id
-  #         AttributeType: S
-  #     KeySchema:
-  #       - AttributeName: id
-  #         KeyType: HASH
-  #     BillingMode: PAY_PER_REQUEST
 
   DefaultRole:
     Type: AWS::IAM::Role
