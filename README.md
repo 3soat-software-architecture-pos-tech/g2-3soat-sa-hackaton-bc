@@ -1,10 +1,17 @@
 ### Implantação
 
-Para implantar o projeto na AWS usando o Serverless Framework e Docker, siga estas etapas:
+Para implantar o projeto na AWS usando o Serverless Framework, siga estas etapas:
 
-1. Certifique-se de ter o Docker instalado em seu sistema.
-2. Configure suas credenciais da AWS no GitHub Secrets como `AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY`.
-3. Certifique-se de ter o Serverless Framework instalado.
+. Configure suas credenciais da AWS no GitHub Secrets como `AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY`.
+. Certifique-se de ter o Serverless Framework instalado.
+
+```shell
+npm i serverless -g
+```
+
+```shell
+serverless update
+```
 
 ```shell
 sls deploy
