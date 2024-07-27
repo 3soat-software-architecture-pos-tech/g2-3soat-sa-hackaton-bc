@@ -29,6 +29,17 @@ Para remover tudo o que está na aws
 sls remove --stage dev
 ```
 
+exemplos URLs:
+✔ Service deployed to stack hackaton-medicine-service-dev (114s)
+endpoints:
+  POST - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/doctor
+  POST - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/paciente
+  POST - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/prontuario
+  GET - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/doctors
+  GET - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/pacientes
+  GET - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/prontuario/paciente/{idPaciente}
+  GET - https://e1n06wmh69.execute-api.us-east-1.amazonaws.com/dev/prontuario/paciente/{idPaciente}/medico/{idMedico}
+
 
 ## Team
  - Turma: 3SOAT
