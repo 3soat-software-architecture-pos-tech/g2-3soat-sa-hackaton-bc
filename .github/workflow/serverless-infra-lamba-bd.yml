@@ -22,8 +22,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Install npm
+      run: apt install npm -y
     - name: Install Serverless Framework
       run: npm install -g serverless
+    - name: update serveless
+      run: serverless update  
 
     - name: Deploy with Serverless
       run: serverless deploy --stage prod --verbose
